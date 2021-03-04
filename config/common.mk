@@ -68,14 +68,14 @@ PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     Stk \
     ExactCalculator \
-    SoundPickerPrebuilt \
     CustomDoze \
     OmniSwitch \
     Seedvault \
     AEXSetupWizard \
     OmniJaws \
     ThemePicker \
-    AEXThemesStub
+    AEXThemesStub \
+#     SoundPickerPrebuilt \
        
 # Navbar
 PRODUCT_PACKAGES += \
@@ -101,9 +101,12 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 PRODUCT_PACKAGES += \
     libjni_latinimegoogle
 
-# Pixel sysconfig
+# permissions
 PRODUCT_COPY_FILES += \
-    vendor/aosp/prebuilt/common/etc/sysconfig/pixel.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/pixel.xml
+    vendor/aosp/prebuilt/common/etc/sysconfig/pixel.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/pixel.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/com.google.android.flipendo.xml:$(TARGET_OUT_SYSTEM_EXT_ETC)/sysconfig/com.google.android.flipendo.xml \
+    vendor/aosp/prebuilt/common/etc/sysconfig/org.lineageos.livedisplay.xml:$(TARGET_OUT_SYSTEM)/etc/sysconfig/org.lineageos.livedisplay.xml \
+    vendor/aosp/prebuilt/common/etc/permissions/org.lineageos.livedisplay.xml:$(TARGET_OUT_SYSTEM)/etc/permissions/org.lineageos.livedisplay.xml
 
 # Extra tools
 PRODUCT_PACKAGES += \
@@ -199,6 +202,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.aicp.adblock=true
     
 ifeq ($(WITH_GAPPS),true)
-include vendor/gapps/gapps.mk
+include vendor/aosp/config/pixel.mk
 endif
     
