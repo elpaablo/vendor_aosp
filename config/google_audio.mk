@@ -42,6 +42,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/notifications/Tuneup.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/Tuneup.ogg \
     $(LOCAL_PATH)/notifications/Tweeter.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/Tweeter.ogg \
     $(LOCAL_PATH)/notifications/Twinkle.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/Twinkle.ogg \
+    $(LOCAL_PATH)/notifications/Spaceline.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/Spaceline.ogg \
+    $(LOCAL_PATH)/notifications/oneplus.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/oneplus.ogg \
+    $(LOCAL_PATH)/ringtones/oneplusring.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/notifications/oneplus.ogg \
     $(LOCAL_PATH)/ringtones/Copycat.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ringtones/Copycat.ogg \
     $(LOCAL_PATH)/ringtones/Crackle.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ringtones/Crackle.ogg \
     $(LOCAL_PATH)/ringtones/Flutterby.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ringtones/Flutterby.ogg \
@@ -84,6 +87,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ui/WirelessChargingStarted.ogg:$(TARGET_COPY_OUT_PRODUCT)/media/audio/ui/WirelessChargingStarted.ogg
 
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.config.alarm_alert=Bright_morning.ogg \
-    ro.config.ringtone=The_big_adventure.ogg \
-    ro.config.notification_sound=Popcorn.ogg
+    ro.config.alarm_alert=oneplusring.ogg \
+    ro.config.ringtone=oneplus.ogg \
+    ro.config.notification_sound=Bright_morning.ogg
