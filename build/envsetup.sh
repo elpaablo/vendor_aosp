@@ -1,7 +1,7 @@
 function __print_aosp_functions_help() {
 cat <<EOF
 Additional AOSP functions:
-- gerrit:          Adds a remote for AEX Gerrit
+- gerrit:          Adds a remote for Arcana Gerrit
 EOF
 }
 
@@ -18,11 +18,11 @@ function gerrit()
         if [[ ! -z $(git config --get remote.gerrit.url) ]]; then
             git remote rm gerrit;
         fi
-        [[ -z "${GERRIT_USER}" ]] && export GERRIT_USER=$(git config --get gerrit.aospextended.com.username);
+        [[ -z "${GERRIT_USER}" ]] && export GERRIT_USER=$(git config --get gerrit.projectarcana.com.username);
         if [[ -z "${GERRIT_USER}" ]]; then
-            git remote add gerrit $(git remote -v | grep AospExtended | awk '{print $2}' | uniq | sed -e "s|https://github.com/AospExtended|ssh://gerrit.aospextended.com:29418/AospExtended|");
+            git remote add gerrit $(git remote -v | grep ProjectArcana | awk '{print $2}' | uniq | sed -e "s|https://github.com/ProjectArcana|ssh://gerrit.projectarcana.com:29418/ProjectArcana|");
         else
-            git remote add gerrit $(git remote -v | grep AospExtended | awk '{print $2}' | uniq | sed -e "s|https://github.com/AospExtended|ssh://${GERRIT_USER}@gerrit.aospextended.com:29418/AospExtended|");
+            git remote add gerrit $(git remote -v | grep ProjectArcana | awk '{print $2}' | uniq | sed -e "s|https://github.com/ProjectArcana|ssh://${GERRIT_USER}@gerrit.projectarcana.com:29418/ProjectArcana|");
         fi
     fi
 }

@@ -1,4 +1,4 @@
-# Copyright (C) 2017 AospExtended
+# Copyright (C) 2017 ProjectArcana
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -83,9 +83,6 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     librs_jni \
     Stk \
-    AEXPapers \
-    DuckDuckGo \
-    MusicPlayerGO \
     Recorder \
     ExactCalculator \
     Etar \
@@ -171,7 +168,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/aosp/prebuilt/common/etc/init.d/00banner:$(TARGET_COPY_OUT_SYSTEM)/etc/init.d/00banner
 
-# AEX-specific init files
+# Arcana-specific init files
 $(foreach f,$(wildcard vendor/aosp/prebuilt/common/etc/init/*.rc),\
     $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
 

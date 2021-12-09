@@ -1,4 +1,4 @@
-# Copyright (C) 2017 AospExtended
+# Copyright (C) 2017 ProjectArcana
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,4 +17,4 @@ $(call inherit-product, vendor/aosp/config/common.mk)
 
 $(call inherit-product, vendor/aosp/config/telephony.mk)
 
-$(call inherit-product, vendor/aosp/config/aex_props.mk)
+$(call inherit-product, vendor/aosp/config/arcana_props.mk)

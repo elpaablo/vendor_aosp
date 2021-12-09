@@ -1,4 +1,4 @@
-# Copyright (C) 2017 AospExtended ROM
+# Copyright (C) 2017 ProjectArcana ROM
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#Extended Versioning
-EXTENDED_VERSION = v9.0
-EXTENDED_BUILD_TYPE := UNOFFICIAL
+#Arcana Versioning
+ARCANA_VERSION = BLITZ
+ARCANA_BUILD_TYPE := UNOFFICIAL
 
-ifeq ($(EXTENDED_BUILD_TYPE), OFFICIAL)
+ifeq ($(ARCANA_BUILD_TYPE), OFFICIAL)
 
-# AEXOTA
-$(call inherit-product-if-exists, vendor/aosp/config/ota.mk)
+# ArcanaOTA
+#$(call inherit-product-if-exists, vendor/aosp/config/ota.mk)
 
 endif
 

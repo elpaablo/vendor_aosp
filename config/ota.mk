@@ -1,4 +1,4 @@
-# Copyright (C) 2017 AospExtended ROM
+# Copyright (C) 2017 ProjectArcana ROM
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ endif
 endif
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.extended.ota.version_code=$(CUSTOM_OTA_VERSION_CODE)
+    ro.arcana.ota.version_code=$(CUSTOM_OTA_VERSION_CODE)
 
 PRODUCT_PACKAGES += \
     Updates
