@@ -22,13 +22,6 @@ else
 ARCANA_BUILD_TYPE ?= UNOFFICIAL
 endif
 
-ifeq ($(ARCANA_BUILD_TYPE), OFFICIAL)
-
-# ArcanaOTA
-#$(call inherit-product-if-exists, vendor/aosp/config/ota.mk)
-
-endif
-
 # AOSP recovery flashing
 ifeq ($(TARGET_USES_AOSP_RECOVERY), true)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
