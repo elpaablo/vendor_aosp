@@ -84,6 +84,7 @@ PRODUCT_PACKAGES += \
     librs_jni \
     Stk \
     Arcanery \
+    OPwidget \
     Recorder \
     ExactCalculator \
     Etar \
