@@ -216,6 +216,16 @@ PRODUCT_PACKAGES += \
     ThemePicker
 endif
 
+
+# Fling Sysprops
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.min.fling_velocity=160 \
+    ro.max.fling_velocity=20000
+
+# Disable Deep Press touch video heatmaps 
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.input.video_enabled=false
+    
 # Gboard
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.com.google.ime.theme_id=5 \
