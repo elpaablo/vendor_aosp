@@ -83,6 +83,7 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     librs_jni \
     Stk \
+    Arcanery \
     Recorder \
     ExactCalculator \
     Etar \
