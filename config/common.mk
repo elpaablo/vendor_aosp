@@ -21,6 +21,10 @@ include vendor/aosp/config/version.mk
 $(call inherit-product, vendor/aosp/config/google_audio.mk)
 
 include vendor/lawnchair/lawnchair.mk
+
+# Lawnicons
+$(call inherit-product-if-exists, vendor/lawnicons/overlay.mk)
+
 # Conditionally build adb root
 #ifneq ($(TARGET_BUILD_VARIANT),user)
 #PRODUCT_PACKAGES += \
