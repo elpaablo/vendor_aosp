@@ -10,3 +10,4 @@ done
 export BUILD_HOSTNAME=projectarcana-build
 export BUILD_USERNAME=android-build
 export SKIP_ABI_CHECKS=true
+export RELAX_USES_LIBRARY_CHECK=true
