@@ -191,6 +191,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     media.recorder.show_manufacturer_and_model=true
 
+# Arcana maintainer
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.arcana.maintainer=$(ARCANA_MAINTAINER)
+    
 # Needed by some RILs and for some gApps packages
 PRODUCT_PACKAGES += \
     librsjni \
