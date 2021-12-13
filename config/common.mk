@@ -240,10 +240,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Recommend using the non debug dexpreopter
 USE_DEX2OAT_DEBUG := false
 
-# GoogleCameraGo
-ifneq ($(TARGET_SHIP_GCAM_GO),false)
+TARGET_BUILD_GRAPHENEOS_CAMERA ?= true
+ifeq ($(strip $(TARGET_BUILD_GRAPHENEOS_CAMERA)),true)
 PRODUCT_PACKAGES += \
-    GoogleCameraGo
+    GrapheneOS-Camera
 endif
 
 ifneq ($(WITH_GAPPS),true)
