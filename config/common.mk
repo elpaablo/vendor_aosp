@@ -90,10 +90,16 @@ PRODUCT_PACKAGES += \
     Stk \
     Arcanery \
     OPwidget \
-    Recorder \
-    ExactCalculator \
-    Etar \
+    Via \
     DevicePersonalizationPrebuiltPixel2020
+
+ifneq ($(WITH_GAPPS),true)
+# SystemUI plugins
+PRODUCT_PACKAGES += \
+    CalculatorGoogle \
+    ClockGoogle \
+    Etar
+endif
 
 # SystemUI plugins
 PRODUCT_PACKAGES += \
