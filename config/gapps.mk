@@ -10,10 +10,6 @@ DEVICE_PACKAGE_OVERLAYS += \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS +=  \
     vendor/aosp/overlay-gapps/common
 
-# Dex preopt
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    NexusLauncherRelease
-
 # Add acsa property for CarrierServices
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.com.google.acsa=true
