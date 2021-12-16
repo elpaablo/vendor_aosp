@@ -232,6 +232,10 @@ PRODUCT_PACKAGES += \
 endif
 
 
+# Disable blur on app-launch
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.launcher.blur.appLaunch=0
+    
 # Fling Sysprops
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.min.fling_velocity=160 \
