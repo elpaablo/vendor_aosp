@@ -15,6 +15,9 @@
 # Gapps
 $(call inherit-product, vendor/aosp/config/gapps.mk)
 
+# Themes
+$(call inherit-product, vendor/themes/common.mk) 
+
 include vendor/aosp/config/version.mk
 
 # Audio files
@@ -226,9 +229,6 @@ SELINUX_IGNORE_NEVERALLOWS ?= true
 # StichImage
 #PRODUCT_PACKAGES += \
 #    StitchImage
-
-# ThemeOverlays
-include packages/overlays/Themes/themes.mk
 
 ifneq ($(WITH_GAPPS),true)
 PRODUCT_PACKAGES += \
