@@ -91,6 +91,7 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     librs_jni \
     Stk \
+    GamingMode \
     Arcanery \
     OPwidget \
     Via \
