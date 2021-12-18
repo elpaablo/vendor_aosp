@@ -24,10 +24,6 @@ include vendor/aosp/config/version.mk
 $(call inherit-product, vendor/aosp/config/google_audio.mk)
 
 include vendor/lawnchair/lawnchair.mk
-
-# Lawnicons
-$(call inherit-product-if-exists, vendor/lawnicons/overlay.mk)
-
 # Conditionally build adb root
 #ifneq ($(TARGET_BUILD_VARIANT),user)
 #PRODUCT_PACKAGES += \
@@ -88,6 +84,7 @@ PRODUCT_PACKAGES += \
     LatinIME \
     LiveWallpapers \
     LiveWallpapersPicker \
+    Lawnchair \
     VisualizationWallpapers \
     librs_jni \
     Stk \
@@ -124,6 +121,8 @@ PRODUCT_PACKAGES += \
 
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Lawnchair  \
+    Settings \
     SystemUI
 
 # Extra packages
@@ -224,9 +223,6 @@ PRODUCT_PACKAGES += \
 #    product_charger_res_images
 #endif
 
-# Selinux
-SELINUX_IGNORE_NEVERALLOWS ?= true
-
 # StichImage
 #PRODUCT_PACKAGES += \
 #    StitchImage
@@ -274,20 +270,4 @@ TARGET_BUILD_GRAPHENEOS_CAMERA ?= true
 ifeq ($(strip $(TARGET_BUILD_GRAPHENEOS_CAMERA)),true)
 PRODUCT_PACKAGES += \
     GrapheneOS-Camera
-endif
-
-ifneq ($(WITH_GAPPS),true)
-#ifeq ($(PRODUCT_TYPE), go)
-#PRODUCT_PACKAGES += \
-#    Launcher3QuickStepGo
-#
-#PRODUCT_DEXPREOPT_SPEED_APPS += \
-#    Launcher3QuickStepGo
-#else
-PRODUCT_PACKAGES += \
-    Launcher3QuickStep
-
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Launcher3QuickStep
-#endif
 endif
