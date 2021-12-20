@@ -4,7 +4,7 @@ PRODUCT_COPY_FILES += \
 
 # World APN list
 PRODUCT_COPY_FILES += \
-    vendor/aosp/prebuilt/common/etc/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+    vendor/aosp/prebuilt/common/etc/apns-conf.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/apns-conf.xml
 
 # Telephony packages
 PRODUCT_PACKAGES += \
