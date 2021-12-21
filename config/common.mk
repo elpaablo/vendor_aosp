@@ -24,6 +24,11 @@ include vendor/aosp/config/version.mk
 $(call inherit-product, vendor/aosp/config/google_audio.mk)
 
 include vendor/lawnchair/lawnchair.mk
+
+# RRO Overlays
+PRODUCT_PACKAGES += \
+    NavigationBarModeGesturalOverlayFS
+    
 # Conditionally build adb root
 #ifneq ($(TARGET_BUILD_VARIANT),user)
 #PRODUCT_PACKAGES += \
