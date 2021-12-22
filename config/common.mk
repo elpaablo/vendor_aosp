@@ -96,7 +96,6 @@ PRODUCT_PACKAGES += \
     GamingMode \
     Arcanery \
     OPwidget \
-    Via \
     DevicePersonalizationPrebuiltPixel2020
 
 ifneq ($(WITH_GAPPS),true)
@@ -104,6 +103,7 @@ ifneq ($(WITH_GAPPS),true)
 PRODUCT_PACKAGES += \
     CalculatorGoogle \
     ClockGoogle \
+    Via \
     Etar
 endif
 
