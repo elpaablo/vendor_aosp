@@ -237,6 +237,10 @@ PRODUCT_PACKAGES += \
     ThemePicker
 endif
 
+# Disable async MTE on system_server
+PRODUCT_PRODUCT_PROPERTIES += \
+    arm64.memtag.process.system_server=off
+    
 # Enable IORap I/O Prefetching
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.device_config.runtime_native_boot.iorap_perfetto_enable=true
