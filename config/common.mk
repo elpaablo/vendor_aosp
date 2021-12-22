@@ -237,6 +237,8 @@ PRODUCT_PACKAGES += \
     ThemePicker
 endif
 
+# Surfaceflinger 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.enable_layer_caching=true
 
 # Disable blur on app-launch
 PRODUCT_PRODUCT_PROPERTIES += \
