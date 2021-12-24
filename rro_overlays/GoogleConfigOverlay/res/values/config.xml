@@ -31,7 +31,7 @@
     <string name="default_sms_application" translatable="false">com.google.android.apps.messaging</string>
 	
     <!-- The name of the package that will hold the dialer role by default. -->
-    <string name="config_defaultDialer" translatable="false">com.google.android.dialer</string>
+    <string name="config_defaultDialer" translatable="false">com.android.dialer</string>
 
     <!-- The name of the package that will hold the system contacts role. -->
     <string name="config_systemContacts" translatable="false">com.google.android.contacts</string>
@@ -50,7 +50,7 @@
         <item>com.google.android.deskclock:Firing</item>
         <item>com.google.android.setupwizard</item>
         <item>com.google.android.apps.pixelmigrate</item>
-        <item>com.google.android.dialer</item>
+        <item>com.android.dialer</item>
         <item>com.google.android.apps.restore</item>
     </string-array>
 
@@ -61,7 +61,7 @@
     <string name="config_defaultWellbeingPackage" translatable="false">com.google.android.apps.wellbeing</string>
 
     <!-- Colon separated list of package names that should be granted DND access -->
-    <string name="config_defaultDndAccessPackages" translatable="false">com.google.android.gms:com.google.android.apps.wellbeing:com.google.android.dialer</string>
+    <string name="config_defaultDndAccessPackages" translatable="false">com.google.android.gms:com.google.android.apps.wellbeing:com.android.dialer</string>
 
     <!-- The component to be the default supervisor profile owner [DO NOT TRANSLATE] -->
     <string name="config_defaultSupervisionProfileOwnerComponent" translatable="false">com.google.android.gms/.kids.account.receiver.ProfileOwnerReceiver</string>
@@ -93,7 +93,7 @@
         <item>com.android.server.telecom</item>
         <item>android</item>
         <!-- Google apps -->
-        <item>com.google.android.dialer</item>
+        <item>com.android.dialer</item>
     </string-array>
 
     <!-- The set of system packages on device that are queryable by any app regardless of the
