@@ -15,6 +15,12 @@
 #Arcana Versioning
 ARCANA_VERSION = BLITZ
 
+ifeq ($(WITH_GAPPS),true)
+PACKAGE_BUILD_TYPE ?= GAPPS
+else
+PACKAGE_BUILD_TYPE ?= VANILLA
+endif
+
 # build type
 ifeq ($(ARCANA_OFFICIAL),true)
 ARCANA_BUILD_TYPE ?= OFFICIAL
