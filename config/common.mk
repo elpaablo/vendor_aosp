@@ -245,6 +245,15 @@ PRODUCT_PACKAGES += \
     ThemePicker
 endif
 
+TARGET_SUPPORTS_BLUR ?= true
+# Enable blurs based on targets
+ifeq ($(TARGET_SUPPORTS_BLUR),true)
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.surface_flinger.supports_background_blur=1 \
+    ro.sf.blurs_are_expensive=1
+    persist.sysui.disableBlur=false
+endif
+
 # Disable async MTE on system_server
 PRODUCT_PRODUCT_PROPERTIES += \
     arm64.memtag.process.system_server=off
