@@ -13,7 +13,7 @@
 # limitations under the License.
 
 #Arcana Versioning
-ARCANA_VERSION = BLITZ
+ARCANA_VERSION = 3.0-CLOVER
 
 ifeq ($(WITH_GAPPS),true)
 PACKAGE_BUILD_TYPE ?= GAPPS
