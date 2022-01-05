@@ -95,17 +95,8 @@ PRODUCT_PACKAGES += \
     Stk \
     GamingMode \
     Arcanery \
-    OPwidget \
     Via \
     DevicePersonalizationPrebuiltPixel2020
-
-ifneq ($(WITH_GAPPS),true)
-# SystemUI plugins
-PRODUCT_PACKAGES += \
-    CalculatorGoogle \
-    ClockGoogle \
-    Etar
-endif
 
 # SystemUI plugins
 PRODUCT_PACKAGES += \
