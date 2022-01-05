@@ -264,7 +264,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # Disable blur on app-launch
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.launcher.blur.appLaunch=0
+    ro.launcher.blur.appLaunch=false
     
 # Fling Sysprops
 PRODUCT_PRODUCT_PROPERTIES += \
