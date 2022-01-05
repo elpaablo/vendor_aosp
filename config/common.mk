@@ -240,11 +240,6 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    StitchImage
 
-ifneq ($(WITH_GAPPS),true)
-PRODUCT_PACKAGES += \
-    ThemePicker
-endif
-
 TARGET_SUPPORTS_BLUR ?= true
 # Enable blurs based on targets
 ifeq ($(TARGET_SUPPORTS_BLUR),true)
