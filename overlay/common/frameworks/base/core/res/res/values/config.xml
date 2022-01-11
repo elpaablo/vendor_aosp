@@ -295,4 +295,7 @@
          should be cut out to display config_signalAttributionPath. -->
     <item name="config_signalCutoutWidthFraction" format="float" type="dimen">11</item>
     <item name="config_signalCutoutHeightFraction" format="float" type="dimen">11</item>
+    
+        <!-- The amount to scale fullscreen snapshots for Overview and snapshot starting windows. -->
+    <item name="config_highResTaskSnapshotScale" format="float" type="dimen">0.8</item>
 </resources>
