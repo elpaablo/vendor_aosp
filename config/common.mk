@@ -104,6 +104,12 @@ PRODUCT_PACKAGES += \
     Via \
     DevicePersonalizationPrebuiltPixel2020
 
+TARGET_BUILD_GRAPHENEOS_CAMERA ?= true
+ifeq ($(strip $(TARGET_BUILD_GRAPHENEOS_CAMERA)),true)
+PRODUCT_PACKAGES += \
+    GrapheneCamera
+endif
+
 # SystemUI plugins
 PRODUCT_PACKAGES += \
     QuickAccessWallet
@@ -286,11 +292,5 @@ ART_BUILD_TARGET_NDEBUG := true
 ART_BUILD_TARGET_DEBUG := false
 ART_BUILD_HOST_NDEBUG := true
 ART_BUILD_HOST_DEBUG := false
-
-TARGET_BUILD_GRAPHENEOS_CAMERA ?= true
-ifeq ($(strip $(TARGET_BUILD_GRAPHENEOS_CAMERA)),true)
-PRODUCT_PACKAGES += \
-    GrapheneOS-Camera
-endif
 
 
