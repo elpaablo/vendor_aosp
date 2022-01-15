@@ -13,7 +13,7 @@
 # limitations under the License.
 
 #Arcana Versioning
-ARCANA_VERSION = 3.0-CLOVER
+ARCANA_VERSION = 3.1-CLAIR
 
 ifeq ($(WITH_GAPPS),true)
 PACKAGE_BUILD_TYPE ?= GAPPS
