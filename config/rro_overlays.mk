@@ -4,6 +4,7 @@ PRODUCT_PACKAGES += \
     CaptivePortalLoginOverlay \
     CellBroadcastServiceOverlay \
     ContactsProviderOverlay \
+    CustomPixelLauncherOverlay \
     FilesOverlay \
     GoogleConfigOverlay \
     GooglePermissionControllerOverlay \
