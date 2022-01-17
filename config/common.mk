@@ -243,7 +243,7 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    StitchImage
 
-TARGET_SUPPORTS_BLUR ?= true
+TARGET_SUPPORTS_BLUR ?= false
 # Enable blurs based on targets
 ifeq ($(TARGET_SUPPORTS_BLUR),true)
 PRODUCT_PRODUCT_PROPERTIES += \
