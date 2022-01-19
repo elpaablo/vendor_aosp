@@ -223,7 +223,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Arcana maintainer
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.arcana.maintainer=$(ARCANA_MAINTAINER)
+    ro.arcana.maintainer=$(ARCANA_MAINTAINER) \
+    ro.arcana.code=$(ARCANA_CODE)
     
 # Needed by some RILs and for some gApps packages
 PRODUCT_PACKAGES += \
