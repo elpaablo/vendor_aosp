@@ -15,6 +15,8 @@
 # Gapps
 $(call inherit-product, vendor/aosp/config/gapps.mk)
 
+$(call inherit-product, vendor/aosp/config/themes.mk)
+
 # Themes
 $(call inherit-product, vendor/themes/common.mk) 
 
