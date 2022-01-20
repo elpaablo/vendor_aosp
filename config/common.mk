@@ -104,9 +104,13 @@ PRODUCT_PACKAGES += \
     librs_jni \
     Stk \
     GamingMode \
-    Arcanery \
     Via \
     DevicePersonalizationPrebuiltPixel2020
+
+ifeq ($(ARCANA_OFFICIAL),true)
+PRODUCT_PACKAGES += \
+    Arcanery
+endif
 
 TARGET_BUILD_GRAPHENEOS_CAMERA ?= true
 ifeq ($(strip $(TARGET_BUILD_GRAPHENEOS_CAMERA)),true)
