@@ -28,7 +28,7 @@ $(call inherit-product, vendor/aosp/config/google_audio.mk)
 PRODUCT_COPY_FILES += \
     vendor/aosp/prebuilt/common/etc/custom_font_config.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/custom_font_config.xml
 
-ifneq ($(WITH_GAPPS),true)
+ifeq ($(WITH_LAWNCHAIR),true)
 include vendor/lawnchair/lawnchair.mk
 endif
     
@@ -310,6 +310,14 @@ ART_BUILD_HOST_DEBUG := false
 # the size of the system image. This has no bearing on stack traces, but will
 # leave less information available via JDWP.
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
+
+ifneq ($(WITH_GAPPS),true)
+PRODUCT_PACKAGES += \
+    Launcher3QuickStep
+
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    Launcher3QuickStep
+endif
 
 
 
