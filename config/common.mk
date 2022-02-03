@@ -260,6 +260,9 @@ PRODUCT_PACKAGES += \
 # ThemeOverlays
 include packages/overlays/Themes/themes.mk
 
+PRODUCT_PACKAGES += \
+    ThemePicker
+    
 TARGET_SUPPORTS_BLUR ?= false
 # Enable blurs based on targets
 ifeq ($(TARGET_SUPPORTS_BLUR),true)
