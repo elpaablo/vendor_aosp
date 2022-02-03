@@ -31,7 +31,7 @@ PRODUCT_COPY_FILES += \
 ifeq ($(WITH_LAWNCHAIR),true)
 include vendor/lawnchair/lawnchair.mk
 endif
-    
+
 # Conditionally build adb root
 #ifneq ($(TARGET_BUILD_VARIANT),user)
 #PRODUCT_PACKAGES += \
@@ -105,11 +105,11 @@ PRODUCT_PACKAGES += \
     Arcanery
 endif
 
-ifeq ($(ARCANA_OFFICIAL),true)
+#ifeq ($(ARCANA_OFFICIAL),true)
 # Repainter integration
 PRODUCT_PACKAGES += \
     RepainterServicePriv
-endif
+#endif
 
 TARGET_BUILD_GRAPHENEOS_CAMERA ?= true
 ifeq ($(strip $(TARGET_BUILD_GRAPHENEOS_CAMERA)),true)
@@ -161,7 +161,7 @@ endif
 # priv-app permissions
 PRODUCT_COPY_FILES += \
     vendor/aosp/prebuilt/common/etc/permissions/privapp-permissions-whitelist.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-whitelist.xml
-    
+
 # Pixel sysconfig from Pixel XL (Photos)
 PRODUCT_COPY_FILES += \
     vendor/aosp/prebuilt/common/etc/sysconfig/pixel_2016_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2016_exclusive.xml \
@@ -207,7 +207,7 @@ PRODUCT_COPY_FILES += \
 # font permission
 PRODUCT_COPY_FILES += \
     vendor/aosp/config/permissions/privapp-permissions-settings.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-settings.xml
-	
+
 # SoftAPManager
 #PRODUCT_PACKAGES += \
 #    SoftAPManager
@@ -237,7 +237,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.arcana.maintainer=$(ARCANA_MAINTAINER) \
     ro.arcana.code=$(ARCANA_CODE)
-    
+
 # Needed by some RILs and for some gApps packages
 PRODUCT_PACKAGES += \
     librsjni \
@@ -257,6 +257,12 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    StitchImage
 
+# ThemeOverlays
+include packages/overlays/Themes/themes.mk
+
+PRODUCT_PACKAGES += \
+    ThemePicker
+
 TARGET_SUPPORTS_BLUR ?= false
 # Enable blurs based on targets
 ifeq ($(TARGET_SUPPORTS_BLUR),true)
@@ -269,7 +275,7 @@ endif
 # Disable async MTE on system_server
 PRODUCT_PRODUCT_PROPERTIES += \
     arm64.memtag.process.system_server=off
-    
+
 # Enable IORap I/O Prefetching
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.device_config.runtime_native_boot.iorap_perfetto_enable=true
@@ -277,16 +283,16 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Disable blur on app-launch
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.launcher.blur.appLaunch=false
-    
+
 # Fling Sysprops
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.min.fling_velocity=50 \
     ro.max.fling_velocity=16000
 
-# Disable Deep Press touch video heatmaps 
+# Disable Deep Press touch video heatmaps
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.input.video_enabled=false
-    
+
 # Gboard
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.com.google.ime.kb_pad_port_b=1
@@ -297,7 +303,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.com.google.ime.kb_pad_port_r?=4 \
     ro.com.google.ime.kb_pad_land_l?=64 \
     ro.com.google.ime.kb_pad_land_r?=64
-    
+
 # Recommend using the non debug dexpreopter
 USE_DEX2OAT_DEBUG := false
 # Don't build debug for host or device
@@ -310,14 +316,3 @@ ART_BUILD_HOST_DEBUG := false
 # the size of the system image. This has no bearing on stack traces, but will
 # leave less information available via JDWP.
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
-
-ifneq ($(WITH_GAPPS),true)
-PRODUCT_PACKAGES += \
-    Launcher3QuickStep
-
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Launcher3QuickStep
-endif
-
-
-
