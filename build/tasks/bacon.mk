@@ -1,4 +1,4 @@
-# Copyright (C) 2020 ProjectArcana Project
+# Copyright (C) 2022 The AOSP Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,16 +27,16 @@ else
 MD5:=md5sum
 endif
 
-TARGET_PACKAGE := $(PRODUCT_OUT)/ProjectArcana-$(ARCANA_VERSION)-$(ARCANA_CODE)-$(TARGET_DEVICE)-$(ARCANA_BUILD_TYPE)-$(PACKAGE_BUILD_TYPE)
+TARGET_PACKAGE := $(PRODUCT_OUT)/ProtonAOSP-$(AOSP_VERSION)-$(AOSP_CODE)-$(TARGET_DEVICE)-$(AOSP_BUILD_TYPE)-$(PACKAGE_BUILD_TYPE)
 
-.PHONY: otapkg bacon arcana
+.PHONY: otapkg bacon aosp
 otapkg: $(INTERNAL_OTA_PACKAGE_TARGET)
-bacon: arcana
-arcana: otapkg
+bacon: aosp
+aosp: otapkg
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip
-	$(hide) $(MD5) $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip > $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip.md5sum                                                                                                              
+	$(hide) $(MD5) $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip > $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip.md5sum
 	@echo -e ${CL_RST} ""
-	@echo -e ${CL_RST} "=======================================-Initialize Project Arcana-======================================="
+	@echo -e ${CL_RST} "=======================================-Initialize Proton AOSP-======================================="
 	@echo -e ${CL_RST} "" ${CL_RST}
 	@echo -e ${CL_BLD}${CL_RED}"=======================================-Package complete-======================================="${CL_RED}
 	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip ${CL_RST}
