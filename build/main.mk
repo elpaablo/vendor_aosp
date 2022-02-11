@@ -1,4 +1,4 @@
-# Copyright (C) 2022  The ProtonAOSP Project
+# Copyright (C) 2020 The Proton AOSP Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#Proton Versioning
-PROTON_VERSION = Platina
-PROTON_CODE = 12
+# Custom ROM version
+-include vendor/proton/version.mk
 
-ifeq ($(WITH_GAPPS),true)
-PACKAGE_BUILD_TYPE ?= GAPPS
-else
-PACKAGE_BUILD_TYPE ?= VANILLA
+# Signing
+-include vendor/proton/signing/keys.mk
+
+# Override fingerprint for Google Play Services and SafetyNet
+ifneq ($(PRODUCT_OVERRIDE_FINGERPRINT),)
+ADDITIONAL_SYSTEM_PROPERTIES += \
+    ro.build.stock_fingerprint=$(PRODUCT_OVERRIDE_FINGERPRINT)
 endif
 
-# build type
-PROTON_BUILD_TYPE ?= UNOFFICIAL
+# Kernel
+#include vendor/proton/build/BoardConfigKernel.mk
