@@ -12,10 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, vendor/proton/build/product.mk)
-
-# Gapps
-$(call inherit-product, vendor/gapps/config.mk)
+#$(call inherit-product, vendor/proton/build/product.mk)
 
 ifeq ($(WITH_LAWNCHAIR),true)
 include vendor/lawnchair/lawnchair.mk
@@ -28,13 +25,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.control_privapp_permissions=log
 
-ifneq ($(WITH_GAPPS),true)
-# Pixel sysconfig
-PRODUCT_COPY_FILES += \
-    vendor/aosp/prebuilt/common/etc/sysconfig/pixel.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel.xml \
-    vendor/aosp/prebuilt/common/etc/permissions/privapp-permissions-google.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-google.xml
-endif
-
 # init.d support
 PRODUCT_COPY_FILES += \
     vendor/aosp/prebuilt/common/etc/init.d/00banner:$(TARGET_COPY_OUT_SYSTEM)/etc/init.d/00banner
@@ -46,11 +36,21 @@ PRODUCT_COPY_FILES += \
 # Enable wireless Xbox 360 controller support
 PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:$(TARGET_COPY_OUT_PRODUCT)/usr/keylayout/Vendor_045e_Product_0719.kl
+    
+TARGET_FACE_UNLOCK_SUPPORTED ?= true
+ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
+PRODUCT_PACKAGES += \
+    FaceUnlockService
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.face_unlock_service.enabled=$(TARGET_FACE_UNLOCK_SUPPORTED)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
+endif
 
-# Proton maintainer
+# Maintainer
 PRODUCT_PRODUCT_PROPERTIES += \
-    ro.aosp.maintainer=$(PROTON_MAINTAINER) \
-    ro.aosp.code=$(PROTON_CODE)
+    ro.aosp.maintainer=$(AOSP_MAINTAINER) \
+    ro.aosp.code=$(AOSP_CODE)
 
 # Disable async MTE on system_server
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -81,8 +81,3 @@ ART_BUILD_HOST_DEBUG := false
 # the size of the system image. This has no bearing on stack traces, but will
 # leave less information available via JDWP.
 PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
-
-include vendor/aosp/config/BoardConfigKernel.mk
-include vendor/aosp/config/BoardConfigQcom.mk
-include vendor/aosp/config/BoardConfigSoong.mk
-include vendor/aosp/config/version.mk

@@ -12,15 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#Proton Versioning
-PROTON_VERSION = Platina
-PROTON_CODE = 12
+#AOSP Versioning
+AOSP_VERSION = ProtonAOSP
+AOSP_CODE = 12
 
-ifeq ($(WITH_GAPPS),true)
+ifeq ($(WITH_GMS),true)
 PACKAGE_BUILD_TYPE ?= GAPPS
-else
-PACKAGE_BUILD_TYPE ?= VANILLA
 endif
 
 # build type
-PROTON_BUILD_TYPE ?= UNOFFICIAL
+AOSP_BUILD_TYPE ?= UNOFFICIAL

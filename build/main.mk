@@ -16,7 +16,7 @@
 -include vendor/proton/version.mk
 
 # Signing
--include vendor/proton/signing/keys.mk
+#-include vendor/proton/signing/keys.mk
 
 # Override fingerprint for Google Play Services and SafetyNet
 ifneq ($(PRODUCT_OVERRIDE_FINGERPRINT),)

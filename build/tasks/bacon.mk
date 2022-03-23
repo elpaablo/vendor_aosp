@@ -20,26 +20,23 @@ ifneq ($(BUILD_WITH_COLORS),0)
   CL_RST="\033[0m"
 endif
 
-# It's called md5 on Mac OS and md5sum on Linux
-ifeq ($(HOST_OS),darwin)
-MD5:=md5 -q
-else
 MD5:=md5sum
-endif
+SHA1:=sha1sum
 
-TARGET_PACKAGE := $(PRODUCT_OUT)/ProtonAOSP-$(AOSP_VERSION)-$(AOSP_CODE)-$(TARGET_DEVICE)-$(AOSP_BUILD_TYPE)-$(PACKAGE_BUILD_TYPE)
+TARGET_PACKAGE := $(PRODUCT_OUT)/$(AOSP_VERSION)-$(TARGET_DEVICE)-$(PACKAGE_BUILD_TYPE)
 
 .PHONY: otapkg bacon aosp
 otapkg: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: aosp
 aosp: otapkg
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip
-	$(hide) $(MD5) $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip > $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip.md5sum
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d).zip
+	$(hide) $(MD5) $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d).zip > $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d).zip.md5sum
+	$(hide) $(SHA1) $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d).zip > $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d).zip.sha1sum	
 	@echo -e ${CL_RST} ""
-	@echo -e ${CL_RST} "=======================================-Initialize Proton AOSP-======================================="
+	@echo -e ${CL_RST} "=======================================-Let's get busy-======================================="
 	@echo -e ${CL_RST} "" ${CL_RST}
 	@echo -e ${CL_BLD}${CL_RED}"=======================================-Package complete-======================================="${CL_RED}
-	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip ${CL_RST}
-	@echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip.md5sum | awk '{print $$1}' `"${CL_RST}
-	@echo -e ${CL_BLD}${CL_YLW}"Size:"${CL_YLW}" `du -sh $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d-%H%M).zip | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"Zip: "${CL_YLW} $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d).zip ${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"MD5: "${CL_YLW}" `cat $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d).zip.md5sum | awk '{print $$1}' `"${CL_RST}
+	@echo -e ${CL_BLD}${CL_YLW}"Size:"${CL_YLW}" `du -sh $(TARGET_PACKAGE)-$(shell $(DATE_FROM_FILE) +%Y%m%d).zip | awk '{print $$1}' `"${CL_RST}
 	@echo -e ${CL_BLD}${CL_RED}"================================================================================================"${CL_RST}
