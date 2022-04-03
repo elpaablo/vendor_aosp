@@ -89,6 +89,18 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     NavigationBarNoHintOverlay
 
+# Navbar styles
+PRODUCT_PACKAGES += \
+    NavbarAndroidOverlay \
+    NavbarAsusOverlay \
+    NavbarMotoOverlay \
+    NavbarNexusOverlay \
+    NavbarOldOverlay \
+    NavbarOnePlusOverlay \
+    NavbarOneUiOverlay \
+    NavbarSammyOverlay \
+    NavbarTecnoCamonOverlay
+
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
