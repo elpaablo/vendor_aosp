@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2018 The Android Open Source Project
+  ~ Copyright (C) 2021 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,9 +13,15 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- [CHAR_LIMIT=NONE] Label for the option that masks the display cutout, i.e. it shrinks the display such that the display cutout is no longer visible.-->
-    <string name="display_cutout_emulation_overlay">Hide</string>
+    <!-- Whether the display cutout region of the main built-in display should be forced to
+         black in software (to avoid aliasing or emulate a cutout that is not physically existent).
+     -->
+    <bool name="config_fillMainBuiltInDisplayCutout">false</bool>
+
+    <!-- If true, hide the display cutout with display area -->
+    <bool name="config_hideDisplayCutoutWithDisplayArea">true</bool>
 
 </resources>

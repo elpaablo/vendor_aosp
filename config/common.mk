@@ -74,6 +74,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # Cutout control overlay
 PRODUCT_PACKAGES += \
+    AvoidAppsInCutout \
     NoCutoutOverlay \
     DummyCutoutOverlay
 

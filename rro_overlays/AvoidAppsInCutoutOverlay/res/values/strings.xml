@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2018 The Android Open Source Project
+  ~ Copyright (C) 2021 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
   -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- [CHAR_LIMIT=NONE] Label for the option that masks the display cutout, i.e. it shrinks the display such that the display cutout is no longer visible.-->
-    <string name="display_cutout_emulation_overlay">Hide</string>
+    <!-- [CHAR_LIMIT=NONE] Label for the option that masks the display cutout, i.e. avoid apps in cutout region.-->
+    <string name="display_cutout_emulation_overlay">Render apps below cutout area</string>
 
 </resources>
+
