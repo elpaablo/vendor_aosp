@@ -286,3 +286,26 @@ ifeq ($(TARGET_SUPPORTS_ADAPTIVE_CHARGING),true)
 PRODUCT_COPY_FILES += \
     vendor/spark/prebuilt/common/etc/sysconfig/dreamliner.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/dreamliner.xml
 endif
+
+# Arcana stuffs
+# IORap app launch prefetching using Perfetto traces and madvise
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.iorapd.enable=true
+
+# Disable blur on app-launch
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.launcher.blur.appLaunch=false
+    
+# Fling Sysprops
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.min.fling_velocity=50 \
+    ro.max.fling_velocity=16000
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    pm.dexopt.boot=verify \
+    pm.dexopt.first-boot=quicken \
+    pm.dexopt.install=speed-profile \
+    pm.dexopt.bg-dexopt=everything
+    
+# Don't compile SystemUITests
+EXCLUDE_SYSTEMUI_TESTS := true
