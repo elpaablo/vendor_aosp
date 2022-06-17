@@ -12,36 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Branding
-$(call inherit-product, vendor/aosp/config/branding.mk)
-
-PRODUCT_BRAND ?= ProtonAOSP
-
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-
-# Flatten APEXs for performance
-OVERRIDE_TARGET_FLATTEN_APEX := true
-# This needs to be specified explicitly to override ro.apex.updatable=true from
-# prebuilt vendors, as init reads /product/build.prop after /vendor/build.prop
-PRODUCT_PRODUCT_PROPERTIES += ro.apex.updatable=false
-
-# Disable RescueParty due to high risk of data loss
-PRODUCT_PRODUCT_PROPERTIES += \
-    persist.sys.disable_rescue=true
-
-# Disable touch video heatmap to reduce latency, motion jitter, and CPU usage
-# on supported devices with Deep Press input classifier HALs and models
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.input.video_enabled=false
-
-# Enable one-handed mode
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.support_one_handed_mode=true
-
-# Enable gestural navigation overlay to match default navigation mode
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
-
 # AOSP userdebug/eng CLI tools
 PRODUCT_PACKAGES += \
     arping \
@@ -97,6 +67,5 @@ $(call inherit-product, vendor/aosp/apps/apps.mk)
 $(call inherit-product, vendor/aosp/bootanimation/bootanimation.mk)
 $(call inherit-product, vendor/aosp/fonts/fonts.mk)
 $(call inherit-product, vendor/aosp/overlay/overlay.mk)
-$(call inherit-product, vendor/aosp/telephony/telephony.mk)
 $(call inherit-product, vendor/aosp/audio/audio.mk)
 $(call inherit-product-if-exists, vendor/aosp/signing/dev.mk)

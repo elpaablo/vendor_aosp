@@ -12,6 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Pixel APNs
+# Telephony
+
+IS_PHONE := true
+
+# Telephony packages
+PRODUCT_PACKAGES += \
+    messaging \
+    Stk \
+    CellBroadcastReceiver \
+
+# Telephony
+PRODUCT_PACKAGES += \
+    telephony-ext
+    
+# Tethering - allow without requiring a provisioning app
+# (for devices that check this)
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    net.tethering.noprovisioning=true
+
+# APNs list
 PRODUCT_COPY_FILES += \
 	vendor/aosp/telephony/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml

@@ -15,15 +15,4 @@
 # Wallpaper & style
 PRODUCT_PACKAGES += \
     ThemePicker \
-    DefaultThemesStub \
-
-# Display cutout settings
-PRODUCT_PACKAGES += \
-    DisplayCutoutEmulationNarrowOverlay \
-    DisplayCutoutEmulationWideOverlay \
-    NoCutoutOverlay \
-    AvoidAppsInCutoutOverlay \
-
-# 2-button gesture navigation
-PRODUCT_PACKAGES += \
-    NavigationBarMode2ButtonOverlay \
+    DefaultThemesStub
