@@ -92,7 +92,7 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        ZIPPATH=`ls -tr "$OUT"/PixelExperience-*.zip | tail -1`
+        ZIPPATH=`ls -tr "$OUT"/ProtonAOSP-*.zip | tail -1`
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
             return 1
@@ -100,7 +100,7 @@ function eat()
         echo "Waiting for device..."
         adb wait-for-device-recovery
         echo "Found device"
-        if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD"); then
+        if (adb shell getprop org.aosp.device | grep -q "$CUSTOM_BUILD"); then
             echo "Rebooting to sideload for install"
             adb reboot sideload-auto-reboot
             adb wait-for-sideload
@@ -280,18 +280,8 @@ function cafremote()
 
 function githubremote()
 {
-    if ! git rev-parse --git-dir &> /dev/null
-    then
-        echo ".git directory not found. Please run this from the root directory of the Android repository you wish to set up."
-        return 1
-    fi
-    git remote rm github 2> /dev/null
-    local REMOTE=$(git config --get remote.pixel.projectname)
-
-    local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
-
-    git remote add github https://github.com/PixelExperience/$PROJECT
-    echo "Remote 'github' created"
+   echo ".git directory not found. Please run this from the root directory of the Android repository you wish to set up."
+   return 1
 }
 
 function installboot()
@@ -321,7 +311,7 @@ function installboot()
     adb wait-for-device-recovery
     adb root
     adb wait-for-device-recovery
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD");
+    if (adb shell getprop org.aosp.device | grep -q "$CUSTOM_BUILD");
     then
         adb push $OUT/boot.img /cache/
         adb shell dd if=/cache/boot.img of=$PARTITION
@@ -359,7 +349,7 @@ function installrecovery()
     adb wait-for-device-recovery
     adb root
     adb wait-for-device-recovery
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD");
+    if (adb shell getprop org.aosp.device | grep -q "$CUSTOM_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
@@ -397,9 +387,18 @@ function pixelgerrit() {
         return 1
     fi
     local user=`git config --get review.gerrit.pixelexperience.org.username`
-    local review=`git config --get remote.pixel.review`
-    local project=`git config --get remote.pixel.projectname`
-    local remote_branch=twelve
+    local review=`git config --get remote.pixel-plus.review`
+    local remote_branch=twelve-plus
+    if [ -z "$review" ]
+    then
+        local review=`git config --get remote.pixel.review`
+    fi
+    local project=`git config --get remote.pixel-plus.projectname`
+    if [ -z "$project" ]
+    then
+        local project=`git config --get remote.pixel.projectname`
+        local remote_branch=twelve
+    fi
     local command=$1
     shift
     case $command in
@@ -640,7 +639,11 @@ function pixelrebase() {
         return
     fi
     cd $dir
-    repo=$(git config --get remote.pixel.projectname)
+    repo=$(git config --get remote.pixel-plus.projectname)
+    if [ -z "$repo" ]
+    then
+        repo=$(git config --get remote.pixel.projectname)
+    fi
     echo "Starting branch..."
     repo start tmprebase .
     echo "Bringing it up to date..."
@@ -730,7 +733,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop org.pixelexperience.device | grep -q "$CUSTOM_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop org.aosp.device | grep -q "$CUSTOM_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices \
