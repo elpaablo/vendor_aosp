@@ -168,4 +168,4 @@ PRODUCT_COPY_FILES += \
 endif
 
 # Proton product.mk
-$(call inherit-product, vendor/aosp/config/proton_common.mk)
+$(call inherit-product, vendor/aosp/config/common_proton.mk)

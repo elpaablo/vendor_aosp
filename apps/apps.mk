@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, vendor/aosp/themes/themes.mk)
-
 LOCAL_PATH := vendor/aosp/apps
 
 # LineageOS apps

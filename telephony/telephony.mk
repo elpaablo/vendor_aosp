@@ -33,4 +33,5 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 # APNs list
 PRODUCT_COPY_FILES += \
-	vendor/aosp/telephony/apns-full-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+	vendor/aosp/telephony/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml \
+	vendor/aosp/telephony/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml

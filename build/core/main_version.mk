@@ -17,6 +17,7 @@ endif
 # Versioning props
 ADDITIONAL_SYSTEM_PROPERTIES  += \
     org.aosp.version=$(CUSTOM_VERSION_PROP) \
+    ro.build.version.custom=$(CUSTOM_VERSION_PROP) \
     org.aosp.version.display=$(CUSTOM_VERSION) \
     org.aosp.build_date=$(CUSTOM_BUILD_DATE) \
     org.aosp.build_date_utc=$(CUSTOM_BUILD_DATE_UTC) \

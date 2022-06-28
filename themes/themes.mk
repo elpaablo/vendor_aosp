@@ -16,3 +16,39 @@
 PRODUCT_PACKAGES += \
     ThemePicker \
     DefaultThemesStub
+
+
+# Navbar styles
+PRODUCT_PACKAGES += \
+    NavbarAndroidOverlay \
+    NavbarAsusOverlay \
+    NavbarMotoOverlay \
+    NavbarNexusOverlay \
+    NavbarOldOverlay \
+    NavbarOnePlusOverlay \
+    NavbarOneUiOverlay \
+    NavbarSammyOverlay \
+    NavbarTecnoCamonOverlay
+
+# Black theme
+PRODUCT_PACKAGES += \
+    AndroidBlackThemeOverlay
+    
+# Statusbar icons
+PRODUCT_PACKAGES += \
+    StrokeSignalOverlay \
+    SneakySignalOverlay \
+    XperiaSignalOverlay \
+    ZigZagSignalOverlay \
+    WavySignalOverlay \
+    RoundSignalOverlay \
+    InsideSignalOverlay \
+    BarsSignalOverlay \
+    StrokeWiFiOverlay \
+    SneakyWiFiOverlay \
+    XperiaWiFiOverlay \
+    ZigZagWiFiOverlay \
+    WavyWiFiOverlay \
+    RoundWiFiOverlay \
+    InsideWiFiOverlay \
+    BarsWiFiOverlay
