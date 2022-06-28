@@ -125,6 +125,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     NavigationBarNoHintOverlay
 
+# Adblock
+PRODUCT_PACKAGES += \
+    hosts.adblock
 
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
