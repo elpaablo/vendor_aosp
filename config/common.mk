@@ -212,6 +212,10 @@ endif
 PRODUCT_PACKAGES += \
     RepainterServicePriv
 
+# Laucher3
+PRODUCT_PACKAGES += \
+    Launcher3QuickStep
+
 # Audio
 $(call inherit-product, vendor/aosp/config/audio.mk)
 
@@ -231,6 +235,6 @@ $(call inherit-product, vendor/aosp/config/ota.mk)
 $(call inherit-product, vendor/aosp/config/rro_overlays.mk)
 
 # Themed icons
-$(call inherit-product, packages/overlays/ThemeIcons/config.mk)
+#$(call inherit-product, packages/overlays/ThemeIcons/config.mk)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
