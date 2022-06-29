@@ -215,6 +215,10 @@ PRODUCT_PACKAGES += \
 # Laucher3
 PRODUCT_PACKAGES += \
     Launcher3QuickStep
+    
+# Graphene Camera
+PRODUCT_PACKAGES += \
+    Camera
 
 # Audio
 $(call inherit-product, vendor/aosp/config/audio.mk)
