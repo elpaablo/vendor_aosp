@@ -234,6 +234,9 @@ $(call inherit-product, vendor/aosp/config/ota.mk)
 # RRO Overlays
 $(call inherit-product, vendor/aosp/config/rro_overlays.mk)
 
+# Custom themes
+$(call inherit-product, vendor/aosp/themes/themes.mk)
+
 # Themed icons
 #$(call inherit-product, packages/overlays/ThemeIcons/config.mk)
 
