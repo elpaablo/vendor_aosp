@@ -15,7 +15,7 @@
     limitations under the License.
 -->
 <resources>
-    <string name="wallpaper_picker_package" translatable="false">com.google.android.apps.wallpaper</string>
+    <string name="wallpaper_picker_package" translatable="false">com.android.wallpaper</string>
     <string name="local_colors_extraction_class" translatable="false">org.protonaosp.launcher3.ThemedLocalColorExtractor</string>
 
     <!-- Enable All Apps header scrim (works fine with our fixed search UI) -->
