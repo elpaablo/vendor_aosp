@@ -190,6 +190,21 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.iorapd.enable=true
 
+# Disable blur on app-launch
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.launcher.blur.appLaunch=false
+    
+# Fling Sysprops
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.min.fling_velocity=50 \
+    ro.max.fling_velocity=16000
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    pm.dexopt.boot=verify \
+    pm.dexopt.first-boot=quicken \
+    pm.dexopt.install=speed-profile \
+    pm.dexopt.bg-dexopt=everything
+
 # Pixel customization
 TARGET_SUPPORTS_GOOGLE_RECORDER ?= true
 TARGET_INCLUDE_STOCK_ARCORE ?= true
@@ -220,6 +235,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Camera
 
+# Lighter GAPPS version (without google setup wizard)
+ifneq ($(FULL_GAPPS),true)
+PRODUCT_PACKAGES += \
+    Provision
+endif
+
 # Audio
 $(call inherit-product, vendor/aosp/config/audio.mk)
 
@@ -240,6 +261,11 @@ $(call inherit-product, vendor/aosp/config/rro_overlays.mk)
 
 # Custom themes
 $(call inherit-product, vendor/aosp/themes/themes.mk)
+
+# Extra fonts
+ifeq ($(TARGET_INCLUDE_EXTRA_FONTS),true)
+$(call inherit-product, vendor/aosp/prebuilt/extra-fonts/fonts.mk)
+endif
 
 # Themed icons
 #$(call inherit-product, packages/overlays/ThemeIcons/config.mk)

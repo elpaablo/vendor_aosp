@@ -5,3 +5,6 @@ do
         lunch_others_targets+=("aosp_$device-$var")
     done
 done
+
+# clean kernel standalone tools to avoid duplicates
+rm -rf kernel/build/tools/libufdt
