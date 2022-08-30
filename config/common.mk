@@ -1,7 +1,7 @@
 # Branding
 $(call inherit-product, vendor/aosp/config/branding.mk)
 
-PRODUCT_BRAND ?= PixelExperience
+PRODUCT_BRAND ?= CustomExperience
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -42,7 +42,6 @@ PRODUCT_COPY_FILES += \
 
 # Copy all custom init rc files
 PRODUCT_COPY_FILES += \
-    vendor/aosp/prebuilt/common/etc/init/init.pixelexperience-updater.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.pixelexperience-updater.rc \
     vendor/aosp/prebuilt/common/etc/init/init.snet.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.snet.rc
 
 # Enable Android Beam on all targets
@@ -59,7 +58,7 @@ PRODUCT_COPY_FILES += \
 
 # Enforce privapp-permissions whitelist
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.control_privapp_permissions=enforce
+    ro.control_privapp_permissions=log
 
 # Power whitelist
 PRODUCT_COPY_FILES += \
@@ -196,6 +195,24 @@ TARGET_SUPPORTS_CALL_RECORDING ?= true
 #    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
 #endif
 
+# Config
+PRODUCT_PACKAGES += \
+    SimpleDeviceConfig
+
+ifneq ($(WITH_GAPPS),true)
+# Required packages
+PRODUCT_PACKAGES += \
+    BluetoothExt \
+    ExactCalculator \
+    LatinIME \
+    Launcher3QuickStep \
+    messaging \
+    SimpleGallery \
+    Stk \
+    ThemePicker \
+    CustomThemesStub
+endif
+
 # Audio
 $(call inherit-product, vendor/aosp/config/audio.mk)
 
@@ -206,15 +223,14 @@ $(call inherit-product, vendor/aosp/config/bootanimation.mk)
 $(call inherit-product, vendor/aosp/config/fonts.mk)
 
 # GApps
+ifeq ($(WITH_GAPPS),true)
 $(call inherit-product, vendor/gapps/config.mk)
-
-# OTA
-#$(call inherit-product, vendor/aosp/config/ota.mk)
 
 # RRO Overlays
 $(call inherit-product, vendor/aosp/config/rro_overlays.mk)
+endif
 
 # Pixel Framework
-$(call inherit-product, vendor/pixel-framework/config.mk)
+#$(call inherit-product, vendor/pixel-framework/config.mk)
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
