@@ -26,6 +26,24 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     GameSpace
 
+ifneq ($(WITH_GAPPS),true)
+# Required packages
+PRODUCT_PACKAGES += \
+    BluetoothExt \
+    ExactCalculator \
+    LatinIME \
+    Launcher3QuickStep \
+    messaging \
+    SimpleGallery \
+    Stk \
+    ThemePicker \
+    XdThemesStub
+endif
+
+# SystemUI plugins
+PRODUCT_PACKAGES += \
+    QuickAccessWallet
+
 # xdroid Additions
 PRODUCT_PACKAGES += \
     kebeletEgg \
@@ -34,7 +52,8 @@ PRODUCT_PACKAGES += \
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
-    NexusLauncherRelease
+    NexusLauncherRelease \
+    Launcher3QuickStep
 
 # Filesystems tools
 PRODUCT_PACKAGES += \
@@ -43,8 +62,10 @@ PRODUCT_PACKAGES += \
     mkfs.ntfs \
     mount.ntfs
 
+ifeq ($(WITH_GAPPS),true)
 # Pixel customization
 TARGET_SUPPORTS_GOOGLE_RECORDER ?= true
 TARGET_INCLUDE_STOCK_ARCORE ?= true
 TARGET_INCLUDE_LIVE_WALLPAPERS ?= true
 TARGET_SUPPORTS_QUICK_TAP ?= false
+endif

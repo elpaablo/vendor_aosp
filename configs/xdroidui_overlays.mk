@@ -28,6 +28,12 @@ endif
 
 # RRO Overlays
 PRODUCT_PACKAGES += \
+    XDSetupOverlay \
+    NavigationBarModeGesturalOverlayFS
+
+ifeq ($(WITH_GAPPS),true)
+# Google RRO Overlays
+PRODUCT_PACKAGES += \
     FilesOverlay \
     PixelLauncherCustomOverlay \
     PixelDocumentsUIGoogleOverlay \
@@ -57,6 +63,5 @@ PRODUCT_PACKAGES += \
     GoogleConfigOverlay \
     SystemUIGoogleOverlay \
     CustomPixelLauncherOverlay \
-    XDSetupOverlay \
-    NavigationBarModeGesturalOverlayFS \
     MediaProviderOverlay
+endif
