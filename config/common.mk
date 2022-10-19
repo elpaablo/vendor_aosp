@@ -161,6 +161,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     adb_root
 
+# Repainter Service
+PRODUCT_PACKAGES += \
+    RepainterServicePriv
+
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
@@ -188,8 +192,7 @@ include vendor/spark/config/packages.mk
 
 ifeq ($(WITH_GAPPS), true)
 # GApps
-$(call inherit-product, vendor/gms/products/gms.mk)
-include vendor/gms/products/board.mk
+$(call inherit-product, vendor/gapps/config.mk)
 endif
 
 # Vanilla
@@ -255,6 +258,11 @@ PRODUCT_PACKAGES += \
     NavbarOneUiOverlay \
     NavbarSammyOverlay \
     NavbarTecnoCamonOverlay
+
+# Blurs
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    ro.sf.blurs_are_expensive=1 \
+    ro.surface_flinger.supports_background_blur=1
 
 # Udfps
 ifeq ($(EXTRA_UDFPS_ANIMATIONS),true)

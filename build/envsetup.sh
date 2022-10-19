@@ -1,3 +1,5 @@
+export GLOBAL_THINLTO=true
+
 function __print_spark_functions_help() {
 cat <<EOF
 Additional sparkOS functions:
