@@ -44,14 +44,14 @@
 #                                          For example, for ARM devices,
 #                                          use zImage-dtb instead of zImage.
 #
-#   BOARD_DTB_CFG                      = Path to a mkdtboimg.py config file for dtb.img
-#
 #   BOARD_DTBO_CFG                     = Path to a mkdtboimg.py config file
 #
 #   BOARD_CUSTOM_DTBOIMG_MK            = Path to a custom dtboimage makefile
 #
 #   KERNEL_CC                          = The C Compiler used. This is automatically set based
 #                                          on whether the clang version is set, optional.
+#   KERNEL_LD                          = The Linker used. This is automatically set based
+#                                          on whether the clang/gcc version is set, optional.
 #
 #   KERNEL_CLANG_TRIPLE                = Target triple for clang (e.g. aarch64-linux-gnu-)
 #                                          defaults to arm-linux-gnu- for arm
@@ -83,7 +83,6 @@ SELINUX_DEFCONFIG := $(TARGET_KERNEL_SELINUX_CONFIG)
 
 ## Internal variables
 DTC := $(HOST_OUT_EXECUTABLES)/dtc
-PAHOLE := $(HOST_OUT_EXECUTABLES)/pahole
 KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ
 RECOVERY_KERNEL_OUT := $(TARGET_OUT_INTERMEDIATES)/RECOVERY_KERNEL_OBJ
 DTBO_OUT := $(TARGET_OUT_INTERMEDIATES)/DTBO_OBJ
@@ -236,18 +235,19 @@ ifneq ($(TARGET_KERNEL_CLANG_COMPILE),false)
         KERNEL_CLANG_VERSION := $(LLVM_PREBUILTS_VERSION)
     endif
     TARGET_KERNEL_CLANG_PATH ?= $(BUILD_TOP)/prebuilts/clang/host/$(HOST_PREBUILT_TAG)/$(KERNEL_CLANG_VERSION)
-    ifeq (,$(filter 5.10, $(TARGET_KERNEL_VERSION)))
-        ifeq ($(KERNEL_ARCH),arm64)
-            KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=aarch64-linux-gnu-
-        else ifeq ($(KERNEL_ARCH),arm)
-            KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=arm-linux-gnu-
-        else ifeq ($(KERNEL_ARCH),x86)
-            KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=x86_64-linux-gnu-
-        endif
+    ifeq ($(KERNEL_ARCH),arm64)
+        KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=aarch64-linux-gnu-
+    else ifeq ($(KERNEL_ARCH),arm)
+        KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=arm-linux-gnu-
+    else ifeq ($(KERNEL_ARCH),x86)
+        KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=x86_64-linux-gnu-
     endif
     PATH_OVERRIDE += PATH=$(TARGET_KERNEL_CLANG_PATH)/bin:$$PATH LD_LIBRARY_PATH=$(TARGET_KERNEL_CLANG_PATH)/lib64:$$LD_LIBRARY_PATH
     ifeq ($(KERNEL_CC),)
         KERNEL_CC := CC="$(CCACHE_BIN) clang"
+    endif
+    ifeq ($(KERNEL_LD),)
+        KERNEL_LD :=
     endif
 endif
 
@@ -255,10 +255,7 @@ ifneq ($(TARGET_KERNEL_MODULES),)
     $(error TARGET_KERNEL_MODULES is no longer supported!)
 endif
 
-# 5.10+ can fully compile without gcc
-ifeq (,$(filter 5.10, $(TARGET_KERNEL_VERSION)))
-    PATH_OVERRIDE += PATH=$(KERNEL_TOOLCHAIN_PATH_gcc):$$PATH
-endif
+PATH_OVERRIDE += PATH=$(KERNEL_TOOLCHAIN_PATH_gcc):$$PATH
 
 # System tools are no longer allowed on 10+
 PATH_OVERRIDE += $(TOOLS_PATH_OVERRIDE)
@@ -275,7 +272,7 @@ endif
 # $(1): output path (The value passed to O=)
 # $(2): target to build (eg. defconfig, modules, dtbo.img)
 define internal-make-kernel-target
-$(PATH_OVERRIDE) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_FLAGS) -C $(KERNEL_SRC) O=$(KERNEL_BUILD_OUT_PREFIX)$(1) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) $(KERNEL_CLANG_TRIPLE) $(KERNEL_CC) $(2)
+$(PATH_OVERRIDE) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_FLAGS) -C $(KERNEL_SRC) O=$(KERNEL_BUILD_OUT_PREFIX)$(1) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) $(KERNEL_CLANG_TRIPLE) $(KERNEL_CC) $(KERNEL_LD) $(2)
 endef
 
 # Make an external module target
@@ -283,7 +280,7 @@ endef
 # $(2): module root path
 # $(3): target to build (eg. modules_install)
 define make-external-module-target
-$(PATH_OVERRIDE) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_FLAGS) -C $(TARGET_KERNEL_EXT_MODULE_ROOT)/$(1) M=$(2)/$(1) KERNEL_SRC=$(BUILD_TOP)/$(KERNEL_SRC) OUT_DIR=$(KERNEL_BUILD_OUT_PREFIX)$(KERNEL_OUT) O=$(KERNEL_BUILD_OUT_PREFIX)$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) $(KERNEL_CLANG_TRIPLE) $(KERNEL_CC) $(3)
+$(PATH_OVERRIDE) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_FLAGS) -C $(TARGET_KERNEL_EXT_MODULE_ROOT)/$(1) M=$(2)/$(1) KERNEL_SRC=$(BUILD_TOP)/$(KERNEL_SRC) OUT_DIR=$(KERNEL_BUILD_OUT_PREFIX)$(KERNEL_OUT) O=$(KERNEL_BUILD_OUT_PREFIX)$(KERNEL_OUT) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) $(KERNEL_CLANG_TRIPLE) $(KERNEL_CC) $(KERNEL_LD) $(3)
 endef
 
 # Generate kernel .config from a given defconfig
@@ -417,7 +414,7 @@ $(KERNEL_CONFIG): $(KERNEL_OUT) $(ALL_KERNEL_DEFCONFIG_SRCS)
 	@echo "Building Kernel Config"
 	$(call make-kernel-config,$(KERNEL_OUT),$(KERNEL_DEFCONFIG))
 
-$(TARGET_PREBUILT_INT_KERNEL): $(KERNEL_CONFIG) $(DEPMOD) $(DTC) $(PAHOLE)
+$(TARGET_PREBUILT_INT_KERNEL): $(KERNEL_CONFIG) $(DEPMOD) $(DTC)
 	@echo "Building Kernel Image ($(BOARD_KERNEL_IMAGE_NAME))"
 	$(call make-kernel-target,$(BOARD_KERNEL_IMAGE_NAME))
 	$(hide) if grep -q '^CONFIG_OF=y' $(KERNEL_CONFIG); then \
@@ -503,27 +500,13 @@ ifeq ($(BOARD_PREBUILT_DTBIMAGE_DIR),)
 $(DTB_OUT):
 	mkdir -p $(DTB_OUT)
 
-ifdef BOARD_DTB_CFG
-MKDTBOIMG := $(HOST_OUT_EXECUTABLES)/mkdtboimg.py$(HOST_EXECUTABLE_SUFFIX)
-$(INSTALLED_DTBIMAGE_TARGET): $(MKDTBOIMG)
-endif
 $(INSTALLED_DTBIMAGE_TARGET): $(DTC) $(DTB_OUT)
-ifeq ($(TARGET_WANTS_EMPTY_DTB),true)
-	@rm -f $@
-	echo "empty" > $@
-else
 	@echo "Building dtb.img"
 	$(hide) find $(DTB_OUT)/arch/$(KERNEL_ARCH)/boot/dts -type f -name "*.dtb" | xargs rm -f
 	$(call make-dtb-target,$(KERNEL_DEFCONFIG))
 	$(call make-dtb-target,$(TARGET_KERNEL_DTB))
-ifdef BOARD_DTB_CFG
-	$(MKDTBOIMG) cfg_create $@ $(BOARD_DTB_CFG) -d $(DTB_OUT)/arch/$(KERNEL_ARCH)/boot/dts
-else
 	cat $(shell find $(DTB_OUT)/arch/$(KERNEL_ARCH)/boot/dts -type f -name "*.dtb" | sort) > $@
-endif # BOARD_DTB_CFG
 	$(hide) touch -c $(DTB_OUT)
-endif # !TARGET_WANTS_EMPTY_DTB
-
 endif # !BOARD_PREBUILT_DTBIMAGE_DIR
 endif # BOARD_INCLUDE_DTB_IN_BOOTIMG
 
@@ -538,7 +521,7 @@ $(RECOVERY_KERNEL_CONFIG): $(ALL_RECOVERY_KERNEL_DEFCONFIG_SRCS)
 	@echo "Building Recovery Kernel Config"
 	$(call make-kernel-config,$(RECOVERY_KERNEL_OUT),$(RECOVERY_DEFCONFIG))
 
-$(TARGET_PREBUILT_INT_RECOVERY_KERNEL): $(RECOVERY_KERNEL_CONFIG) $(DEPMOD) $(DTC) $(PAHOLE)
+$(TARGET_PREBUILT_INT_RECOVERY_KERNEL): $(RECOVERY_KERNEL_CONFIG) $(DEPMOD) $(DTC)
 	@echo "Building Recovery Kernel Image ($(BOARD_KERNEL_IMAGE_NAME))"
 	$(call make-recovery-kernel-target,$(BOARD_KERNEL_IMAGE_NAME))
 

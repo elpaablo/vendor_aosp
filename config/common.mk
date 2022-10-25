@@ -76,7 +76,7 @@ PRODUCT_COPY_FILES += \
 
 # Enforce privapp-permissions whitelist
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.control_privapp_permissions=enforce
+    ro.control_privapp_permissions=log
 
 # Include AOSP audio files
 include vendor/lineage/config/aosp_audio.mk
@@ -224,3 +224,4 @@ include vendor/lineage/config/version.mk
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/lineage/config/partner_gms.mk
+-include vendor/custom/config.mk
