@@ -100,8 +100,8 @@ PRODUCT_PACKAGE_OVERLAYS += \
     vendor/aosp/overlay/common
 
 # TouchGestures
-#PRODUCT_PACKAGES += \
-#    TouchGestures
+PRODUCT_PACKAGES += \
+    TouchGestures
 
 # One Handed mode
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -165,10 +165,6 @@ PRODUCT_PACKAGES += \
 	libtextclassifier_actions_suggestions_universal_model \
 	libtextclassifier_lang_id_model
 
-# Apps
-PRODUCT_PACKAGES += \
-    Aperture
-
 # Use gestures by default
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
@@ -185,24 +181,37 @@ TARGET_SUPPORTS_QUICK_TAP ?= false
 TARGET_SUPPORTS_CALL_RECORDING ?= true
 
 # Face Unlock
-#TARGET_FACE_UNLOCK_SUPPORTED ?= true
-#ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
-#PRODUCT_PACKAGES += \
-#    FaceUnlockService
-#PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-#    ro.face_unlock_service.enabled=$(TARGET_FACE_UNLOCK_SUPPORTED)
-#PRODUCT_COPY_FILES += \
-#    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
-#endif
+TARGET_FACE_UNLOCK_SUPPORTED ?= true
+ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
+PRODUCT_PACKAGES += \
+    FaceUnlockService
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.face_unlock_service.enabled=$(TARGET_FACE_UNLOCK_SUPPORTED)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
+endif
+
+# Camera
+PRODUCT_PACKAGES += \
+    GrapheneCamera
 
 # Config
 PRODUCT_PACKAGES += \
     SimpleDeviceConfig
 
+# Game Space
+PRODUCT_PACKAGES += \
+    GameSpace
+
+# Repainter
+PRODUCT_PACKAGES += \
+    RepainterServicePriv
+
 ifneq ($(WITH_GAPPS),true)
 # Required packages
 PRODUCT_PACKAGES += \
     BluetoothExt \
+    Eleven \
     ExactCalculator \
     LatinIME \
     Launcher3QuickStep \
@@ -228,9 +237,9 @@ $(call inherit-product, vendor/gapps/config.mk)
 
 # RRO Overlays
 $(call inherit-product, vendor/aosp/config/rro_overlays.mk)
-endif
 
 # Pixel Framework
 #$(call inherit-product, vendor/pixel-framework/config.mk)
+endif
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
