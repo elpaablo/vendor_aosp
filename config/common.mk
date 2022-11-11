@@ -99,6 +99,11 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 PRODUCT_PACKAGE_OVERLAYS += \
     vendor/aosp/overlay/common
 
+# Cutout control overlay
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay \
+    DummyCutoutOverlay
+
 # TouchGestures
 PRODUCT_PACKAGES += \
     TouchGestures
@@ -110,6 +115,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # NavigationBarMode
 PRODUCT_PACKAGES += \
     NavigationBarMode2ButtonOverlay
+
+# Hide navigation bar hint
+PRODUCT_PACKAGES += \
+    NavigationBarNoHintOverlay
 
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
