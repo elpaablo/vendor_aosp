@@ -214,12 +214,11 @@ PRODUCT_PACKAGES += \
     Eleven \
     ExactCalculator \
     LatinIME \
-    Launcher3QuickStep \
+    TrebuchetQuickStep \
     messaging \
     SimpleGallery \
     Stk \
-    ThemePicker \
-    CustomThemesStub
+    ThemePicker
 endif
 
 # Audio
