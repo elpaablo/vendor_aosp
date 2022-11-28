@@ -5,3 +5,4 @@ do
         lunch_others_targets+=("aosp_$device-$var")
     done
 done
+export SKIP_ABI_CHECKS=true
