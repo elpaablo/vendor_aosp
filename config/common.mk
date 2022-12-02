@@ -1,7 +1,7 @@
 # Branding
 $(call inherit-product, vendor/aosp/config/branding.mk)
 
-PRODUCT_BRAND ?= CustomExperience
+PRODUCT_BRAND ?= AlphaAOSP
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -118,7 +118,8 @@ PRODUCT_PACKAGES += \
 
 # Hide navigation bar hint
 PRODUCT_PACKAGES += \
-    NavigationBarNoHintOverlay
+    NavigationBarNoHintOverlay \
+    NavigationBarNoHintNoImeOverlay
 
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \

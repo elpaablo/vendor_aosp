@@ -12,4 +12,8 @@
     <dimen name="navigation_bar_width">0dp</dimen>
     <!-- The height of the bottom navigation gesture area. -->
     <dimen name="navigation_bar_gesture_height">18dp</dimen>
+    <!-- Height of the bottom navigation bar frame when hide ime space -->
+    <dimen name="navigation_bar_frame_height">0dp</dimen>
+    <!-- Height of the bottom navigation bar frame in landscape when hide ime space -->
+    <dimen name="navigation_bar_frame_height_landscape">0dp</dimen>
 </resources>
